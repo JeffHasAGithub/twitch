@@ -1,3 +1,6 @@
-class BaseError(Exception):
-    def __init__(self, msg: str):
-        self.msg = f"{__package__} {msg}"
+class ApiError(Exception):
+    """Base API Error"""
+
+
+class HttpError(ApiError):
+    """Http Error"""

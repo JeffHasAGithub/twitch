@@ -1,4 +1,7 @@
 import requests
+import requests.exceptions
+
+from .error import HttpError
 
 
 def get(url: str, params: dict, **kwargs):

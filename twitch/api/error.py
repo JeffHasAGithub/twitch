@@ -4,3 +4,7 @@ class ApiError(Exception):
 
 class HttpError(ApiError):
     """Http Error"""
+
+
+class JsonError(ApiError):
+    """Json Error"""

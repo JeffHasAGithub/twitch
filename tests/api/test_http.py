@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import Mock, patch
-from twitch.api.http import get, post
+from twitch.api.http import get, post, extract_json
 
 _json = {"widget": {"debug": "on",
                     "window": {"title": "Sample Konfabulator Widget",
@@ -38,3 +38,14 @@ class TestHttp(unittest.TestCase):
 
         response = post("https://test.com/test", {})
         self.assertEqual(response.status_code, 200)
+
+    @patch("twitch.api.http.requests.get")
+    def test_extract_json_valid(self, mock_get):
+        mock_get.return_value = Mock(status_code=200)
+        mock_get.return_value.json.return_value = _json
+
+        response = mock_get()
+        json = extract_json(response)
+
+        self.assertIsNotNone(json)
+        self.assertDictEqual(json, _json)

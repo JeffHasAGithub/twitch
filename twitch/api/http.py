@@ -35,6 +35,12 @@ def post(url: str, params: dict, **kwargs):
 
 
 def extract_json(response: requests.Response, **kwargs):
+    """
+    Extract JSON from given instance of requests.Response class.
+    Raise JsonError on invalid JSON.
+
+    Return dict if JSON is valid, None otherwise.
+    """
     if not response:
         return None
 

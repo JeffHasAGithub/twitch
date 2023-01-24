@@ -20,6 +20,11 @@ def get(url: str, params: dict, **kwargs):
 
 
 def post(url: str, params: dict, **kwargs):
+    """
+    Perform POST request and return response.
+    Raise HttpError on bad request.
+    """
+
     try:
         response = requests.post(url, params, kwargs)
         response.raise_for_status()

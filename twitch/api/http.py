@@ -1,7 +1,7 @@
 import requests
 import requests.exceptions
 
-from .error import HttpError
+from .error import HttpError, JsonError
 
 
 def get(url: str, params: dict, **kwargs):
@@ -31,6 +31,6 @@ def extract_json(response: requests.Response, **kwargs):
     try:
         json = response.json(**kwargs)
     except requests.exceptions.InvalidJSONError:
-        raise HttpError("Json error: invalid JSON")
+        raise JsonError("Json error: invalid JSON")
 
     return json

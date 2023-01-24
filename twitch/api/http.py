@@ -5,6 +5,11 @@ from .error import HttpError, JsonError
 
 
 def get(url: str, params: dict, **kwargs):
+    """
+    Perform GET request and return response.
+    Raise HttpError on bad request.
+    """
+
     try:
         response = requests.get(url, params, **kwargs)
         response.raise_for_status()

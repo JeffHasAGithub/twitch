@@ -22,3 +22,15 @@ def post(url: str, params: dict, **kwargs):
         raise HttpError(f"Http error: {e}")
 
     return response
+
+
+def extract_json(response: requests.Response, **kwargs):
+    if not response:
+        return None
+
+    try:
+        json = response.json(**kwargs)
+    except requests.exceptions.InvalidJSONError:
+        raise HttpError("Json error: invalid JSON")
+
+    return json

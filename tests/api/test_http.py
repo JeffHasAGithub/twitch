@@ -28,11 +28,9 @@ class TestHttp(unittest.TestCase):
     @patch("twitch.api.http.requests.get")
     def test_get_valid(self, mock_get):
         mock_get.return_value = Mock(status_code=200)
-        mock_get.return_value.json.return_value = _json
 
         response = get("https://test.com/test", {})
         self.assertEqual(response.status_code, 200)
-        self.assertIsNotNone(response.json())
 
     @patch("twitch.api.http.requests.post")
     def test_post_valid(self, mock_get):

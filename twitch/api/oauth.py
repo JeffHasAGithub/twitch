@@ -1,6 +1,6 @@
 from typing import NamedTuple
 
-from .http import get, extract_json
+from .http import post, extract_json
 
 
 class OAuth(NamedTuple):
@@ -25,7 +25,7 @@ def authenticate(client_id: str, client_secret: str) -> OAuth:
             "client_secret": client_secret,
             "grant_type": "client_credentials"}
 
-    json = extract_json(get(url, data))
+    json = extract_json(post(url, data))
     oauth = OAuth(client_id, client_secret,
                   json["access_token"])
 

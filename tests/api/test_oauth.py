@@ -5,7 +5,7 @@ from twitch.api.oauth import authenticate
 
 class TestOAuth(unittest.TestCase):
     def setUp(self):
-        self.mock_post_patch = patch("twitch.api.oauth.get")
+        self.mock_post_patch = patch("twitch.api.oauth.post")
         self.mock_post = self.mock_post_patch.start()
 
         self.client_id = "aabbcc"

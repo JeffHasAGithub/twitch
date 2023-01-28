@@ -4,14 +4,14 @@ import requests.exceptions
 from .error import HttpError, JsonError
 
 
-def get(url: str, params: dict, **kwargs):
+def get(url: str, **kwargs):
     """
     Perform GET request and return response.
     Raise HttpError on bad request.
     """
 
     try:
-        response = requests.get(url, params, **kwargs)
+        response = requests.get(url, **kwargs)
         response.raise_for_status()
     except requests.exceptions.HTTPError as e:
         raise HttpError(f"Http error: {e}")
@@ -19,14 +19,14 @@ def get(url: str, params: dict, **kwargs):
     return response
 
 
-def post(url: str, params: dict, **kwargs):
+def post(url: str, **kwargs):
     """
     Perform POST request and return response.
     Raise HttpError on bad request.
     """
 
     try:
-        response = requests.post(url, params, kwargs)
+        response = requests.post(url, **kwargs)
         response.raise_for_status()
     except requests.exceptions.HTTPError as e:
         raise HttpError(f"Http error: {e}")

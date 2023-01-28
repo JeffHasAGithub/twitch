@@ -32,6 +32,8 @@ def post(url: str, **kwargs):
         response.raise_for_status()
     except requests.exceptions.HTTPError as e:
         raise HttpError(f"Http error: {e.request}")
+    except requests.exceptions.ConnectionError:
+        raise HttpError("Http error: could not connect")
 
     return response
 

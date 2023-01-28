@@ -31,7 +31,7 @@ def post(url: str, **kwargs):
         response = requests.post(url, **kwargs)
         response.raise_for_status()
     except requests.exceptions.HTTPError as e:
-        raise HttpError(f"Http error: {e.request}")
+        raise HttpError(f"Http error: {e.response.status_code}")
     except requests.exceptions.ConnectionError:
         raise HttpError("Http error: could not connect")
 

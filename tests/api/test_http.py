@@ -29,14 +29,14 @@ class TestHttp(unittest.TestCase):
     def test_get_valid(self, mock_get):
         mock_get.return_value = Mock(status_code=200)
 
-        response = get("https://test.com/test", {})
+        response = get("https://test.com/test")
         self.assertEqual(response.status_code, 200)
 
     @patch("twitch.api.http.requests.post")
     def test_post_valid(self, mock_get):
         mock_get.return_value = Mock(status_code=200)
 
-        response = post("https://test.com/test", {})
+        response = post("https://test.com/test")
         self.assertEqual(response.status_code, 200)
 
     @patch("twitch.api.http.requests.get")

@@ -1,6 +1,8 @@
 import unittest
+import requests
 from unittest.mock import Mock, patch
 from twitch.api.http import get, post, extract_json
+from twitch.api.error import HttpError
 
 _json = {"widget": {"debug": "on",
                     "window": {"title": "Sample Konfabulator Widget",
@@ -31,6 +33,14 @@ class TestHttp(unittest.TestCase):
 
         response = get("https://test.com/test")
         self.assertEqual(response.status_code, 200)
+
+    @patch("twitch.api.http.requests.get")
+    def test_get_bad_request(self, mock_get):
+        mock_get.return_value = Mock(status_code=404)
+        mock_get.side_effect = requests.exceptions.HTTPError(response=mock_get)
+
+        with self.assertRaises(HttpError):
+            get("https://test.com/test")
 
     @patch("twitch.api.http.requests.post")
     def test_post_valid(self, mock_get):

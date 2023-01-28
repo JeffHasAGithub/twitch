@@ -42,6 +42,13 @@ class TestHttp(unittest.TestCase):
         with self.assertRaises(HttpError):
             get("https://test.com/test")
 
+    @patch("twitch.api.http.requests.get")
+    def test_get_bad_connection(self, mock_get):
+        mock_get.side_effect = requests.exceptions.ConnectionError()
+
+        with self.assertRaises(HttpError):
+            get("https://test.com/test")
+
     @patch("twitch.api.http.requests.post")
     def test_post_valid(self, mock_get):
         mock_get.return_value = Mock(status_code=200)
